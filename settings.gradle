@@ -1,0 +1,2 @@
+rootProject.name='Mes plats'
+include ':app'
