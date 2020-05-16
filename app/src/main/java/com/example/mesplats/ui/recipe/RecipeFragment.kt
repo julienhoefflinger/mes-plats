@@ -1,4 +1,4 @@
-package com.example.mesplats.ui.gallery
+package com.example.mesplats.ui.recipe
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mesplats.R
 
-class GalleryFragment : Fragment() {
+class RecipeFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
+    private lateinit var RecipeViewModel: RecipeViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel::class.java)
+        RecipeViewModel =
+                ViewModelProviders.of(this).get(RecipeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_gallery, container, false)
         val textView: TextView = root.findViewById(R.id.text_gallery)
-        galleryViewModel.text.observe(viewLifecycleOwner, Observer {
+        RecipeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
