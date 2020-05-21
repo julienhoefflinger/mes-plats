@@ -30,10 +30,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_recipe"
         android:name="com.example.mesplats.ui.recipe.RecipeFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:label="@string/menu_recipe"
+        tools:layout="@layout/fragment_recipe" />
 
     <fragment
         android:id="@+id/nav_slideshow"

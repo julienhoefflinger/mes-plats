@@ -20,8 +20,10 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var recipeDao: RecipeDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -38,9 +40,16 @@ class MainActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow), drawerLayout)
+                R.id.nav_home, R.id.nav_recipe, R.id.nav_slideshow), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        //test base de données
+        recipeDao = AppDatabase.getAppDatabase(this)
+            .getRecipeDAO()
+        recipeDao.insert(Recipe("Tarte aux pommes"))
+        recipeDao.insert(Recipe("kouglof"))
+        recipeDao.insert(Recipe("couscous"))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
