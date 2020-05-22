@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mesplats.R
+import com.example.mesplats.Recipe
 
-class RecipeAdapter(private val recipe: ArrayList<Recipe>, private val onItemClickListener: AdapterView.OnItemClickListener) :
+class RecipeAdapter(private val recipe: ArrayList<Recipe>) :
     RecyclerView.Adapter<RecipeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
@@ -14,13 +15,12 @@ class RecipeAdapter(private val recipe: ArrayList<Recipe>, private val onItemCli
             R.layout.row_recipe_fragment, parent,
             false)
 
-        return RecipeViewHolder(row, onItemClickListener)
+        return RecipeViewHolder(row)
     }
 
     override fun onBindViewHolder(viewholder: RecipeViewHolder, position: Int) {
-        val name = this.recipe[position]//.fields
-
-        viewholder.recipeName.text = name.toString()
+        val name = this.recipe[position].name//.fields
+        viewholder.recipeName.text = name
     }
 
     override fun getItemCount(): Int {

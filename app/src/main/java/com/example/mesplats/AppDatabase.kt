@@ -1,6 +1,6 @@
 package com.example.mesplats
 
-import android.content.Context
+import androidx.fragment.app.FragmentActivity
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -19,14 +19,16 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         private var INSTANCE: AppDatabase? = null
 
-        fun getAppDatabase(context: Context): AppDatabase {
+        fun getAppDatabase(context: FragmentActivity?): AppDatabase {
             if (INSTANCE == null) {
                 synchronized(AppDatabase::class) {
-                    INSTANCE = Room
-                    .databaseBuilder(context.applicationContext, AppDatabase::class.java, "db")
-                    .allowMainThreadQueries()
-                    .fallbackToDestructiveMigration()
-                    .build()
+                    if (context != null) {
+                        INSTANCE = Room
+                            .databaseBuilder(context.applicationContext, AppDatabase::class.java, "db")
+                            .allowMainThreadQueries()
+                            .fallbackToDestructiveMigration()
+                            .build()
+                    }
                 }
             }
             return INSTANCE as AppDatabase

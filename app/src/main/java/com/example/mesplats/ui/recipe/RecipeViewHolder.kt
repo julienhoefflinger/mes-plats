@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mesplats.R
 
-class RecipeViewHolder (rootView: View, onItemClickListener: AdapterView.OnItemClickListener) : RecyclerView.ViewHolder(rootView) {
+class RecipeViewHolder (rootView: View) : RecyclerView.ViewHolder(rootView) {
     var recipeName: TextView
 //    var restaurantZone: TextView
 //    var restaurantImage: ImageView

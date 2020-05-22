@@ -6,6 +6,8 @@ import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -20,7 +22,6 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var recipeDao: RecipeDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //
@@ -29,11 +30,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -44,12 +41,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        //test base de données
-        recipeDao = AppDatabase.getAppDatabase(this)
-            .getRecipeDAO()
-        recipeDao.insert(Recipe("Tarte aux pommes"))
-        recipeDao.insert(Recipe("kouglof"))
-        recipeDao.insert(Recipe("couscous"))
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
