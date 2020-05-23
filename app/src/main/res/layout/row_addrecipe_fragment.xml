@@ -13,21 +13,22 @@
         tools:layout_editor_absoluteY="1dp">
 
         <TextView
-            android:id="@+id/f_row_recipe_title"
+            android:id="@+id/f_row_ingredient_title"
             android:layout_width="149dp"
             android:layout_height="35dp"
             android:layout_weight="1"
             android:text="Nom ingredient" />
 
-        <TextView
-            android:id="@+id/textView2"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/f_row_ingredient_quantity"
             android:layout_width="37dp"
             android:layout_height="35dp"
             android:layout_weight="1"
+            android:inputType="number"
             android:text="Quantité" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_add_ingredient_in_recipe"
             android:layout_width="157dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

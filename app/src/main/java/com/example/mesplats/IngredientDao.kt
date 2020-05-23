@@ -8,11 +8,14 @@ import androidx.room.Query
 @Dao
 interface IngredientDao {
 
-    @Query("SELECT * FROM ingredient")
+    @Query("SELECT * FROM ingredient ORDER BY name")
     fun getAll(): List<Ingredient>
 
     @Insert
     fun insert(vararg ingredient: Ingredient)
+
+    @Query("DELETE FROM ingredient")
+    fun deleteAll()
 
     @Delete
     fun delete(ingredient: Ingredient)

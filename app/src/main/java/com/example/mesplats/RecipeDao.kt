@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface RecipeDao {
 
-    @Query("SELECT * FROM recipe")
+    @Query("SELECT * FROM recipe ORDER BY name")
     fun getAll(): List<Recipe>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
