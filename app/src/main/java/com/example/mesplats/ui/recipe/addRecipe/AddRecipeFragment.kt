@@ -18,8 +18,8 @@ class AddRecipeFragment : Fragment() {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
+        val root = inflater.inflate(R.layout.fragment_addrecipe, container, false)
+//        val textView: TextView = root.findViewById(R.id.textView_addRecipe)
         return root
     }
 }

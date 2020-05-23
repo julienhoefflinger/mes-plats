@@ -5,11 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mesplats.AppDatabase
@@ -17,9 +15,7 @@ import com.example.mesplats.R
 import com.example.mesplats.Recipe
 import com.example.mesplats.RecipeDao
 import com.example.mesplats.ui.recipe.addRecipe.AddRecipeFragment
-import com.example.mesplats.ui.slideshow.SlideshowFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 
 
 const val RECIPES_ARGUMENTS_KEY = "RECIPES_ARGUMENTS_KEY"
@@ -38,15 +34,16 @@ class RecipeFragment : Fragment() {
     ): View? {
         val rootview = inflater.inflate(R.layout.fragment_recipe, container, false)
 
-
-
+        //bouton ajout recette
         val fab: FloatingActionButton = rootview.findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            SlideShowFragment slideShowFragment = new SlideShowFragment()
-            FragmentManager manager = getFragmentManager()
-            manager.beginTransaction()
-                .replace(R.id.f_recipe_main_layout, slideShowFragment, slideShowFragment.getTag())
-                .commit()
+        fab.setOnClickListener {
+            val nextFrag = AddRecipeFragment()
+            if (container != null) {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.f_recipe_main_layout, nextFrag, "findThisFragment")
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
 
 

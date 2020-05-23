@@ -10,6 +10,6 @@
     <string name="menu_home">Planning</string>
     <string name="menu_recipe">Recettes</string>
     <string name="menu_slideshow">Slideshow</string>
-
+    <color name="white">#FFFFFF</color>
     <string name="home_second">Home Second</string>
 </resources>
