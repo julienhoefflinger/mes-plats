@@ -52,6 +52,7 @@ class AddRecipeFragment : Fragment() {
         ingredientDao.insert(Ingredient("Pommes"))
         ingredientDao.insert(Ingredient("Oeufs"))
         ingredientDao.insert(Ingredient("Semoule"))
+        ingredientDao.insert(Ingredient("Huile"))
 
         Log.i("MyfragmentRecipe", ingredientDao.getAll().toString())
 
