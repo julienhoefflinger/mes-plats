@@ -18,15 +18,15 @@
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="Quantité"
-            android:inputType="number"
-            android:text="1" />
+            android:hint="0"
+            android:inputType="number"/>
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="26dp"
+            android:layout_width="82dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:entries="@array/array_name"
             android:hint="Unité" />
 
         <TextView

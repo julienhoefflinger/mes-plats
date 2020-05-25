@@ -8,76 +8,48 @@
     android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="289dp"
-        android:layout_height="39dp"
-        android:gravity="center_horizontal"
-        android:text="Donne un nom à ta recette !"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputEditText"
-        android:layout_width="302dp"
-        android:layout_height="44dp"
+        android:layout_width="336dp"
+        android:layout_height="52dp"
         android:hint="Nom de la recette"
+        app:layout_constraintBottom_toTopOf="@+id/ingredientsRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="297dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginBottom="320dp"
-        android:gravity="center_horizontal"
-        android:text="Choisi les ingrédients nécessaires"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/ingredientsRecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputEditText"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ingredientsRecyclerView"
-        android:layout_width="268dp"
-        android:layout_height="278dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="263dp"
+        android:layout_height="448dp"
         app:layout_constraintBottom_toTopOf="@+id/textInputEditText_ingredientName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/textInputEditText_ingredientName"
+        android:layout_width="179dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="136dp"
+        android:hint="Nouvel ingrédient"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_create_ingredient"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_create_ingredient"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginRight="44dp"
+        android:layout_width="88dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginRight="72dp"
         android:text="Ajouter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredientsRecyclerView"
-        app:layout_constraintVertical_bias="0.214" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText_ingredientName"
-        android:layout_width="224dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="192dp"
-        android:hint="Nouvel ingrédient"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_create_ingredient"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

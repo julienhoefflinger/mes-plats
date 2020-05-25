@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities=[Ingredient::class, Recipe::class, Recipe_ingredient::class],
-    version = 1
+    version = 2
 )
 abstract class AppDatabase : RoomDatabase() {
 

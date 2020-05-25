@@ -1,9 +1,6 @@
 package com.example.mesplats
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface IngredientDao {
@@ -11,7 +8,7 @@ interface IngredientDao {
     @Query("SELECT * FROM ingredient ORDER BY name")
     fun getAll(): List<Ingredient>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg ingredient: Ingredient)
 
     @Query("DELETE FROM ingredient")
@@ -21,7 +18,7 @@ interface IngredientDao {
     fun delete(ingredient: Ingredient)
 
     @Query("SELECT * FROM ingredient WHERE name LIKE :queryName")
-    fun findByName(queryName: String): Ingredient
+    fun findByName(queryName: String): List<Ingredient>
 
     @Query("SELECT * FROM ingredient WHERE name LIKE :queryId")
     fun findById(queryId: Int): Ingredient

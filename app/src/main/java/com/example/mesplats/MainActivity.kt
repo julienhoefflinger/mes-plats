@@ -1,7 +1,10 @@
 package com.example.mesplats
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
+import android.view.inputmethod.InputMethodManager
 import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -53,5 +56,15 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    /**
+     * Hides soft keyboard if is open.
+     */
+    fun hideKeyboard() {
+        currentFocus?.windowToken?.let {
+            (getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager?)
+                ?.hideSoftInputFromWindow(it, InputMethodManager.HIDE_NOT_ALWAYS)
+        }
     }
 }

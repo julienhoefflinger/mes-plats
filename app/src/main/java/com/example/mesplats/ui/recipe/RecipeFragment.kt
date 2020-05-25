@@ -50,7 +50,7 @@ class RecipeFragment : Fragment() {
         //test base de données
         recipeDao = AppDatabase.getAppDatabase(context as FragmentActivity?)
             .getRecipeDAO()
-        recipeDao.deleteAll()
+//        recipeDao.deleteAll()
         recipeDao.insert(Recipe("Tarte aux pommes"))
         recipeDao.insert(Recipe("kouglof"))
         recipeDao.insert(Recipe("couscous"))
