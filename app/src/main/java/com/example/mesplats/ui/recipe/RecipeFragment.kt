@@ -35,10 +35,12 @@ class RecipeFragment : Fragment() {
         val rootview = inflater.inflate(R.layout.fragment_recipe, container, false)
 
         //bouton ajout recette
-        val fab: FloatingActionButton = rootview.findViewById(R.id.fab)
+        val fab: FloatingActionButton = rootview.findViewById(R.id.f_recipe_fab)
         fab.setOnClickListener {
+            fab.setOnClickListener(null)
             val nextFrag = AddRecipeFragment()
             if (container != null) {
+                fab.hide()
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.f_recipe_main_layout, nextFrag, "findThisFragment")
                     .addToBackStack(null)

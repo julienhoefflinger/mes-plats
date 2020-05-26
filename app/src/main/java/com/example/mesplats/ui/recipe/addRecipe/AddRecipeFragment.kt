@@ -14,6 +14,11 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mesplats.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.*
+import java.util.Arrays.copyOf
+import java.util.EnumSet.copyOf
+import kotlin.collections.ArrayList
 
 
 class AddRecipeFragment : Fragment() {
@@ -31,7 +36,7 @@ class AddRecipeFragment : Fragment() {
     ): View? {
         val rootview = inflater.inflate(R.layout.fragment_addrecipe, container, false)
 
-        //bouton ajout recette
+        //bouton ajout ingredient
         val button_create_ingredient: Button = rootview.findViewById(R.id.button_create_ingredient)
         val text: EditText = rootview.findViewById(R.id.textInputEditText_ingredientName)
         button_create_ingredient.setOnClickListener {
@@ -43,6 +48,8 @@ class AddRecipeFragment : Fragment() {
                 ingredientDao.insert(ingredient)
                 ingredients.add(ingredient)
                 recyclerView.adapter?.notifyDataSetChanged()
+
+                ingredientAdapter.quantities.append(0)
             } else { Toast.makeText(context, "Cet ingrédient existe déjà", Toast.LENGTH_SHORT).show() }
             val a: Activity? = activity
             (a as MainActivity).hideKeyboard()
@@ -61,19 +68,22 @@ class AddRecipeFragment : Fragment() {
 
         //liste ingrédients
         ingredients = ingredientDao.getAll() as ArrayList<Ingredient>
-        val adapter = IngredientAdapter(ingredients)
-        Log.i("MyfragmentRecipe", adapter.getItemCount().toString())
+        ingredientAdapter = IngredientAdapter(ingredients)
+        val quantities: IntArray = ingredientAdapter.quantities
         recyclerView = rootview.findViewById<View>(R.id.ingredientsRecyclerView) as RecyclerView
         val layourManager = LinearLayoutManager(context)
         layourManager.orientation = LinearLayoutManager.VERTICAL;
         recyclerView.layoutManager = layourManager
-        recyclerView.adapter = adapter
+        recyclerView.adapter = ingredientAdapter
 
+        // Buton ajou recette
+        val fab: FloatingActionButton = rootview.findViewById(R.id.f_addrecipe_fab)
+        fab.setOnClickListener {
+            for (quantity in quantities) {
+                Log.i("quantities", quantity.toString())
+            }
+        }
 
-
-        val rootview2 = inflater.inflate(R.layout.row_addrecipe_fragment, container, false)
-        val text2: EditText = rootview2.findViewById(R.id.f_row_ingredient_quantity)
-        Log.i("inputs recyclerview", text2.text.toString())
 
         return rootview
     }
