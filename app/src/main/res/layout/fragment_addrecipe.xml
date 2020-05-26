@@ -5,25 +5,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:windowSoftInputMode="adjustPan">
 
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/textInputEditText"
+        android:windowSoftInputMode="adjustPan"
         android:layout_width="336dp"
         android:layout_height="52dp"
+        android:layout_marginBottom="24dp"
         android:hint="Nom de la recette"
         app:layout_constraintBottom_toTopOf="@+id/ingredientsRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ingredientsRecyclerView"
-        android:layout_width="263dp"
-        android:layout_height="448dp"
+        android:layout_width="267dp"
+        android:layout_height="224dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/textInputEditText_ingredientName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -39,6 +41,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <Button
         android:id="@+id/button_create_ingredient"
         android:layout_width="88dp"
@@ -49,8 +52,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredientsRecyclerView"
-        app:layout_constraintVertical_bias="0.0" />
-
+        app:layout_constraintVertical_bias="0.144" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/f_addrecipe_fab"
