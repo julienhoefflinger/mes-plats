@@ -4,13 +4,17 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mesplats.Ingredient
 import com.example.mesplats.R
+import java.util.*
 
 
-class IngredientAdapter(private val ingredient: ArrayList<Ingredient>, private var quantities: ArrayList<Int>) :
+class IngredientAdapter(private val ingredient: ArrayList<Ingredient>, private var quantities: Hashtable<String, IngredientFull>) :
     RecyclerView.Adapter<IngredientViewHolder>() {
 //    var quantities: ArrayList<Int> = ArrayList()
 
@@ -46,13 +50,76 @@ class IngredientAdapter(private val ingredient: ArrayList<Ingredient>, private v
                 before: Int,
                 count: Int
             ) {
-                quantities[viewholder.getAdapterPosition()] =
-                    viewholder.ingredientQuantity.getText().toString().toInt()
+//                quantities[viewholder.getAdapterPosition()] =
+//                    viewholder.ingredientQuantity.getText().toString().toInt()
+                var quantity = viewholder.ingredientQuantity.getText().toString()
+                if (quantity == "" || quantity.toInt() == 0) {
+                    if(quantities.containsKey(viewholder.ingredientName.text as String)){
+                        quantities.remove(viewholder.ingredientName.text as String)
+                    }
+                }
+                else {
+                    if(quantities.containsKey(viewholder.ingredientName.text as String)){
+                        quantities[viewholder.ingredientName.text as String] =
+                            IngredientFull(
+                                quantity.toInt(),
+                                viewholder.ingredientUnit.getSelectedItem().toString()
+                            )
+                    } else {
+                        quantities.put(
+                            viewholder.ingredientName.text as String,
+                            IngredientFull(
+                                quantity.toInt(),
+                                viewholder.ingredientUnit.getSelectedItem().toString()
+                            )
+                        )
+                    }
+                }
+
 
 //                quantities.set(position, viewholder.ingredientQuantity.getText().toString().toInt())
             }
 
             override fun afterTextChanged(s: Editable) {}
+        })
+
+
+
+        viewholder.ingredientUnit.setOnItemSelectedListener(object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parentView: AdapterView<*>?,
+                selectedItemView: View?,
+                position: Int,
+                id: Long
+            ) {
+                var quantity = viewholder.ingredientQuantity.getText().toString()
+                if (quantity == "" || quantity.toInt() == 0) {
+                    if(quantities.containsKey(viewholder.ingredientName.text as String)){
+                        quantities.remove(viewholder.ingredientName.text as String)
+                    }
+                }
+                else {
+                    if(quantities.containsKey(viewholder.ingredientName.text as String)){
+                        quantities[viewholder.ingredientName.text as String] =
+                            IngredientFull(
+                                quantity.toInt(),
+                                viewholder.ingredientUnit.getSelectedItem().toString()
+                            )
+                    } else {
+                        quantities.put(
+                            viewholder.ingredientName.text as String,
+                            IngredientFull(
+                                quantity.toInt(),
+                                viewholder.ingredientUnit.getSelectedItem().toString()
+                            )
+                        )
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+                // your code here
+            }
         })
 
 
@@ -69,4 +136,8 @@ class IngredientAdapter(private val ingredient: ArrayList<Ingredient>, private v
 //    override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
 //        TODO("Not yet implemented")
 //    }
+
+    class IngredientFull(val quantity: Int, val unit: String){
+
+    }
 }

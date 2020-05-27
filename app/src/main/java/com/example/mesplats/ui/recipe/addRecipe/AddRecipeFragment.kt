@@ -27,7 +27,7 @@ class AddRecipeFragment : Fragment() {
     private lateinit var ingredientAdapter: IngredientAdapter
     private var ingredientDao: IngredientDao = AppDatabase.getAppDatabase(context as FragmentActivity?).getIngredientDAO()
     private var ingredients: ArrayList<Ingredient> = ingredientDao.getAll() as ArrayList<Ingredient>
-    private var quantities: ArrayList<Int> = ArrayList(ingredients.size)
+    private var quantities: Hashtable<String, IngredientAdapter.IngredientFull> = Hashtable<String, IngredientAdapter.IngredientFull>(ingredients.size)
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -47,7 +47,15 @@ class AddRecipeFragment : Fragment() {
 
 
         //liste ingrédients
-        for (x in 0..ingredients.size-1) quantities.add(0)
+//        for (x in 0..ingredients.size-1){
+//            quantities.put(
+//                ingredients.get(x).name,
+//                IngredientAdapter.IngredientFull(
+//                    0,
+//                    ""
+//                )
+//            )
+//        }
 
         ingredientAdapter = IngredientAdapter(ingredients, quantities)
         recyclerView = rootview.findViewById<View>(R.id.ingredientsRecyclerView) as RecyclerView
@@ -59,8 +67,12 @@ class AddRecipeFragment : Fragment() {
         // Bouton ajout recette
         val fab: FloatingActionButton = rootview.findViewById(R.id.f_addrecipe_fab)
         fab.setOnClickListener {
+            val recipeName = rootview.findViewById<View>(R.id.textInputEditText)
             for (quantity in quantities) {
-                Log.i("quantities", quantity.toString())
+                Log.i("ingredient name : ", quantity.key)
+                Log.i("quantities", quantity.value.quantity.toString())
+                Log.i("unit", quantity.value.unit)
+                Log.i("", "")
             }
         }
 
@@ -79,7 +91,13 @@ class AddRecipeFragment : Fragment() {
                 ingredients.add(ingredient)
                 recyclerView.adapter?.notifyDataSetChanged()
 
-                quantities.add(0)
+                quantities.put(
+                    ingredientName,
+                    IngredientAdapter.IngredientFull(
+                        0,
+                        ""
+                    )
+                )
             } else { Toast.makeText(context, "Cet ingrédient existe déjà", Toast.LENGTH_SHORT).show() }
             val a: Activity? = activity
             (a as MainActivity).hideKeyboard()
