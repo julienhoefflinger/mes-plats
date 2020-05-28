@@ -7,14 +7,14 @@ import androidx.room.RoomDatabase
 
 
 @Database(
-    entities=[Ingredient::class, Recipe::class, Recipe_ingredient::class],
-    version = 2
+    entities=[Ingredient::class, Recipe::class, RecipeIngredient::class],
+    version = 3
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun getIngredientDAO(): IngredientDao
-    abstract fun getRecipeDAO(): RecipeDao
-    abstract fun getRecipeçingredientDAO(): Recipe_ingredientDao
+    abstract fun getIngredientDao(): IngredientDao
+    abstract fun getRecipeDao(): RecipeDao
+    abstract fun getRecipeIngredientDao(): RecipeIngredientDao
 
     companion object {
         private var INSTANCE: AppDatabase? = null

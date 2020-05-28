@@ -9,7 +9,7 @@
     android:windowSoftInputMode="adjustPan">
 
 
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
         android:id="@+id/textInputEditText"
         android:windowSoftInputMode="adjustPan"
         android:layout_width="336dp"

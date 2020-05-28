@@ -2,6 +2,7 @@ package com.example.mesplats.ui.recipe.addRecipe
 
 import android.app.Activity
 import android.os.Bundle
+import android.provider.SyncStateContract.Helpers.insert
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +17,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mesplats.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.*
-import java.util.Arrays.copyOf
-import java.util.EnumSet.copyOf
 import kotlin.collections.ArrayList
 
 
@@ -25,8 +24,12 @@ class AddRecipeFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var ingredientAdapter: IngredientAdapter
-    private var ingredientDao: IngredientDao = AppDatabase.getAppDatabase(context as FragmentActivity?).getIngredientDAO()
+    private var ingredientDao: IngredientDao = AppDatabase.getAppDatabase(context as FragmentActivity?).getIngredientDao()
     private var ingredients: ArrayList<Ingredient> = ingredientDao.getAll() as ArrayList<Ingredient>
+
+    private var recipeDao: RecipeDao = AppDatabase.getAppDatabase(context as FragmentActivity?).getRecipeDao()
+    private var recipeIngredientDao: RecipeIngredientDao = AppDatabase.getAppDatabase(context as FragmentActivity?).getRecipeIngredientDao()
+
     private var quantities: Hashtable<String, IngredientAdapter.IngredientFull> = Hashtable<String, IngredientAdapter.IngredientFull>(ingredients.size)
 
     override fun onCreateView(
@@ -67,9 +70,24 @@ class AddRecipeFragment : Fragment() {
         // Bouton ajout recette
         val fab: FloatingActionButton = rootview.findViewById(R.id.f_addrecipe_fab)
         fab.setOnClickListener {
-            val recipeName = rootview.findViewById<View>(R.id.textInputEditText)
+            Log.i("***********************", "")
+            val recipeName = (rootview.findViewById<View>(R.id.textInputEditText) as EditText).text.toString()
+            recipeDao.insert(Recipe(recipeName))
+            val recipeId = recipeDao.findByName(recipeName).id
+            Log.i("Recipe name : ", recipeName)
+            Log.i("recipe id : ", recipeId.toString())
             for (quantity in quantities) {
+                val ingredientId = ingredientDao.findByName(quantity.key).get(0).id
                 Log.i("ingredient name : ", quantity.key)
+                Log.i("ingredient id : ", ingredientId.toString())
+                recipeIngredientDao.insert(
+                    RecipeIngredient(
+                        quantity.value.quantity,
+                        ingredientId,
+                        recipeId,
+                        quantity.value.unit
+                    )
+                )
                 Log.i("quantities", quantity.value.quantity.toString())
                 Log.i("unit", quantity.value.unit)
                 Log.i("", "")

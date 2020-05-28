@@ -10,18 +10,22 @@ import java.io.Serializable
         ForeignKey(
             entity = Ingredient::class,
             parentColumns = arrayOf("id"),
-            childColumns = arrayOf("ingredient_id"),
+            childColumns = arrayOf("ingredientId"),
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = Recipe::class,
             parentColumns = arrayOf("id"),
-            childColumns = arrayOf("recipe_id"),
+            childColumns = arrayOf("recipeId"),
             onDelete = ForeignKey.CASCADE
         )
     )
 )
-data class Recipe_ingredient (val quantity: Int, val ingredient_id: Int, val recipe_id: Int) : Serializable {
+data class RecipeIngredient (val quantity: Int, val ingredientId: Int, val recipeId: Int, val unit: String) : Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+
+//    fun getId: Int {
+//        return id
+//    }
 }
